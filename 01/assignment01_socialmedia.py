@@ -49,7 +49,12 @@ def menu():
         print(*menuItemsLoggedIn, sep = '\n')
         menuItem = input ('Your selection ')
         if menuItem == '1':
-            giveUser(loggedinUser)
+            # giveUser(loggedinUser)
+            checkFriendRequest()
+        if menuItem == '2':
+            # giveUser(loggedinUser)
+            checkFriendRequest()
+
         
         
     elif (loggedin == False):
@@ -175,8 +180,6 @@ def rejectUser(u):
     menu()
 
 
-menu()
-
 
 
 
@@ -188,7 +191,22 @@ menu()
 # Ask the user if the your_new_friend can become their friend
 # Use an if-statement to either display "Friend request accepted" or "Friend request declined"
 
-your_new_friend = "Erik"
+
+def checkFriendRequest():
+    your_new_friend = "Erik"
+
+    if not your_new_friend:
+        print("Helaas pindakaas, no new friends here!")
+    else:
+        print('🛎 You have 1️⃣ NEW FRIEND request from', your_new_friend)
+        friendDecicion  = input("You want to accept? (y / n)")
+
+        if friendDecicion == 'y':
+            print('✅ Accepted! You are now a friend of', your_new_friend, 'good luck!')
+            menu()
+
+
+        
 
 
 # --- STEP 5: Adding content --- #
@@ -196,5 +214,7 @@ your_new_friend = "Erik"
 # Display the message and ask if the user wants to publish the message
 # Use an if-statement to either display "Message posted" or "Message deleted"
 
+
+menu()
 
 
