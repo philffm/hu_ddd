@@ -96,7 +96,8 @@ def regUser():
     # email = input("What is your email?")
     # password = input("What is your password?")
     year = int(input("What is your year of birth?"))
-    print("Wow, you are", date.year - year, "years old")
+    age = date.year - year
+    print("Wow, you are", age, "years old")
 
 # --- STEP 2: Adding bias --- #
 # Look at your variables and use an if-statement to create a label
@@ -109,8 +110,9 @@ def regUser():
         sdg = 0
         print("Ok boomer, I think you should take care of the following sustaiability goal:",sustainabilityGoals[sdg])
     elif (year >= 1970):
-        sdg = 1
+        sdg = 13
         print("You are young and live by the sea? What about",sustainabilityGoals[sdg])
+
 
 
 
@@ -133,7 +135,7 @@ def regUser():
 # ✅ Create a welcome message welcoming the user using the included your_social_media_app_name variable
 # ✅ Ask the user for a username, password, year of birth, and any other relevant information for your social media app
 # While doing so think of the bias your variables might enable
-# Calculate the age using the year of birth and create an extra variable age
+# ✅ Calculate the age using the year of birth and create an extra variable age
 # Use input() for this and store each data type in a seperate variable
 
 
