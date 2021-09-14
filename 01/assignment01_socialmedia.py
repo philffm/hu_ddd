@@ -16,6 +16,7 @@ date = currentDateTime.date()
 currentYear = date.year
 
 # Global declarations
+
 loggedin = False
 loggedinUser = None
 currentSDG = None
@@ -24,7 +25,7 @@ your_social_media_app_name = 'SustainableMe'
 
 
 menuItems = ['1️⃣ 🛎 Login', '2️⃣ 📝 New user']
-menuItemsLoggedIn = ['1️⃣👤 Profile', '2️⃣⛔️ Logout']
+menuItemsLoggedIn = ['1️⃣👤 Profile', '2️⃣👤 Create post','3️⃣🌱 See my sustainablility goals' '4️⃣⛔️ Logout']
 
 sustainabilityGoals = ["Goal 1. End poverty in all its forms everywhere",
 "Goal 2. End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
@@ -45,18 +46,24 @@ sustainabilityGoals = ["Goal 1. End poverty in all its forms everywhere",
 "Goal 17. Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development"]
 
 def menu():
+    global loggedin 
+    global loggedinUser
     if (loggedin == True):
         print(*menuItemsLoggedIn, sep = '\n')
         menuItem = input ('Your selection ')
         if menuItem == '1':
-            # giveUser(loggedinUser)
             checkFriendRequest()
         if menuItem == '2':
             # giveUser(loggedinUser)
-            checkFriendRequest()
+            createPost()
+        if menuItem == '3':
+            giveUserProfile(loggedinUser)
+        if menuItem == '4':
+            loggedin = False;
+            loggedinUser = None;
+            print("⛔️ Logging out...")
+            menu()
 
-        
-        
     elif (loggedin == False):
         print(*menuItems, sep = '\n')
         menuItem = input ('Your selection ')
@@ -83,11 +90,11 @@ def checkDB(i, searchInput, searchKey):
     rejectUser(searchInput)
 
 
-def giveUser(u):
-
-    currentSDG = checkDB(1, u,"SDG")
-    print(u, currentSDG)
-
+def giveUserProfile(u):
+    print( checkDB(1, u,"First name"))
+    print( sustainabilityGoals[int(checkDB(1, u,"SDG"))])
+    # print(u, currentSDG)
+    menu()
 
 def regUser():
 
@@ -136,13 +143,13 @@ def regUser():
 # ✅ Ask the user for a username, password, year of birth, and any other relevant information for your social media app
 # While doing so think of the bias your variables might enable
 # ✅ Calculate the age using the year of birth and create an extra variable age
-# Use input() for this and store each data type in a seperate variable
+# ✅ Use input() for this and store each data type in a seperate variable
 
 
 # --- STEP 6: Security measures --- #
-# Let the user login using a if-statement
-# The login only has to work once
-# Display if the user successfully logged in or not
+# ✅ Let the user login using a if-statement
+# ✅ The login only has to work once
+# ✅ Display if the user successfully logged in or not
 
 
 def authUser():
@@ -183,7 +190,9 @@ def rejectUser(u):
 
 
 
-
+def createPost():
+    print("⛔️ Sorry, This feature is not availabile")
+    menu()
 
 
 
