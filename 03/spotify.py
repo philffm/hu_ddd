@@ -26,13 +26,15 @@ app_icon = '🎸'
 
 playlist = []
 users = []
+songs = []
+
 
 menuItems = ['1️⃣ ✏️ 🔑 Login ', '2️⃣ Register']
 menuItemsLoggedIn = [ '1️⃣ 👶 Add Family member','2️⃣ 🎸 Add Song To Playlist', '🔟 🗑 Log off']
 
 def open_file(file_name):
     # filename = './' + filename
-    with open (file_name,"r") as file_content:
+    with open (file_name,'r') as file_content:
         file_content = json.load(file_content)
         print(file_content)
         return file_content 
@@ -100,12 +102,14 @@ def add_family():
 
 # ✅ Make a function where a user can add a song to the playlist. The user has to be logged in. If you are feeling adventurous, you can also add the name of the user that added the song to the playlist as an extra field.
 
-def add_song():
-    artist = input('artist please 👉 ')
-    album = input('album please 👉 ')
+def add_playlist():
+
+    # for song in songs:
+    #     print(song)
+
     song = input('song please 👉 ')
-    artist = input('artist please 👉')
-    playlist.append( {'artist': artist, 'album': album, 'song': song})
+    addsong = search_db(songs,'song',song)
+    playlist.append(addsong)
     save_file(playlist,'playlist.json')
     successMessage = '✅ Successfully added', song, 'to your playlist'
     giveDialogue(successMessage)   
@@ -152,7 +156,7 @@ def menu():
             add_family()
 
         if menuItem == '2':
-            add_song()
+            add_playlist()
 
         # if menuItem == '3':
         #     menu()
@@ -191,6 +195,7 @@ def menu():
 
 playlist = open_file('songs.json')
 users = open_file('users.json')
+songs = open_file('songs.json')
 
 print('Welcome to',app_icon,app_name)
 print('__________________')
@@ -200,16 +205,3 @@ menu()
 
 
 
-
-# showPlaylist()
-
-
-
-
-
-
-# save_file(playlist, 'playlist.json')
-
-# # Make a function that saves users.json
-
-# save_file(users, 'users.json')
