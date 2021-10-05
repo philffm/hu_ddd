@@ -68,7 +68,7 @@ f08 = '8. Create a new column "kimono" that is True if the Plot contains the wor
 #and false if not (tip: find a suitable string method).
 #Tip: use Pandas .astype(int) to convert the resulting Boolean in 0 or 1.
 def eight():
-    selection = df.loc[(df['Origin/Ethnicity'].str.contains('Turkish', case = False)) & (df['Release Year']>=2000)]
+    selection = 0
     print(selection)
 
 
