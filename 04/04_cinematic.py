@@ -1,3 +1,8 @@
+# Weekly Assignment 04
+# Student name: 1690236
+# Student numner: Phil Wornath
+
+
 import pandas as pd
 
 import os
