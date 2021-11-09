@@ -68,8 +68,10 @@ f08 = '8. Create a new column "kimono" that is True if the Plot contains the wor
 #and false if not (tip: find a suitable string method).
 #Tip: use Pandas .astype(int) to convert the resulting Boolean in 0 or 1.
 def eight():
-    selection = 0
-    print(selection)
+
+    df.loc[df['Plot'].str.contains('kimono'), 'kimono'] = True
+
+    print(df['kimono'])
 
 
 f09 = '9. Using your new column, pd.groupby() and another Pandas function, count the number of movies'
