@@ -102,7 +102,6 @@ async def update_data(self, msg):
     data_city = handle_data.output_data(current_city, 'data.csv')
     data_facebook = handle_data.output_data(current_city, 'data_facebook.csv')
     cityname = data_city['city'][:1].item()
-    # chart_socialdata = 
     img_strava = img_path +'strava_'+cityname+'.png'
     
     setattr(wp.app, 'style', style_wide)
@@ -112,13 +111,15 @@ async def update_data(self, msg):
     # setattr(wp.head_h1, 'style','')
     setattr(wp.head_h2, 'text','Join them, not the haters.')
     setattr(wp.head_h1, 'text','People ❤️ cycling in '+ current_city)
-    # wp.div_strava.innerHTML = ''
     
+     
     strava_score = handle_data.calc_strava(current_city)
     wp.div_strava = jp.Div(a = wp.head, classes ='strava box', style = 'background: url("'+img_strava+'") no-repeat;'  )
     wp.head_heatmap_score = jp.Div(classes = 'heatmap score', a = wp.div_strava, text = 'Score: '+ str(strava_score)+ '%')
     
-    
+
+
+    # Output according color for the displayed strava score
     def calc_color(score):
         blue = 0
         if score > 50:
@@ -161,11 +162,13 @@ async def update_data(self, msg):
         # get reaction size in percent
         try:
             reaction_pct = sum(data_facebook[reaction]) / sum(reactions.values())
+        # avoid crash when there is 0 reactions of that type
         except ZeroDivisionError:
             reaction_pct = 0
 
-        # define image size
+        # define image size based on reaction percentage
         reaction_size = reaction_pct * 350
+        # prevent super huge symbols in the graph: Of course that's basically falsifying data, but also there is user experience 
         if reaction_size > 110:
             reaction_size = 110
         # reaction_size = sum(data_facebook[reaction])
@@ -186,27 +189,6 @@ async def update_data(self, msg):
 
 
     setattr(wp.grid_citydata, 'max-height', '100px')
-
-
-
-    # jp.Div(text='Multiple Pie Charts', a=wp.app, classes='text-white bg-blue-500 text-center text-xl')
-    # df_pie = pd.DataFrame(data_facebook)
-    # df_pie.plot(df_pie)
-
-
-    # data_facebook
-    # jp.run_task(render_reactions)
-    # reactions = ['haha', 'care', 'like', 'angry', 'love', 'sad', 'wow']
-    # for reaction in data_facebook:
-    #     print(jp.Img(src=img_path + reaction + '.svg'))
-
-
-# async def render_reactions(self, msg):
-#     data_facebook = handle_data.output_data(current_city, 'data_facebook.csv')
-
-#     img_like = jp.Img(source= img_path + 'like.svg' )
-#     # df_reactions = 
-#         print(sum(data_facebook[reaction]))
 
 
 
@@ -341,18 +323,6 @@ async def main(request):
 
 
 
-
-
-# def women_majors():
-
-#     wm = pd.read_csv('https://elimintz.github.io/women_majors.csv').round(2)
-#     # Create list of majors which start under 20% women students
-#     wm_under_20 = list(wm.loc[0, wm.loc[0] < 20].index)
-#     wp = jp.WebPage()
-#     wm.jp.plot(0, wm_under_20, kind='spline', a=wp, title='The gender gap is transitory - even for extreme cases',
-#                subtitle='Percentage of Bachelors conferred to women form 1970 to 2011 in the US for extreme cases where the percentage was less than 20% in 1970',
-#                 classes='m-2 p-2 w-3/4')
-#     return wp
 
 
 if __name__ == '__main__':

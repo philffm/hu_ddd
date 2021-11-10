@@ -19,7 +19,8 @@ def get_citydata(current_city):
     name = data_weather['name']
     data_pollution = weather.get_pollution(lat, lon)
     data_pollution = data_pollution['list']
-    data_walkscore = walkscore.get_walkscore(name, lat, lon)
+    # data_walkscore = walkscore.get_walkscore(name, lat, lon)
+    data_walkscore = walkscore.get_walkscore(current_city, lat, lon)
     data_pollution = give_pollution(data_pollution)
     data_strava = strava.get_heatmap(lat, lon, name)
 
@@ -38,8 +39,6 @@ def give_pollution(data_pollution):
 # df2 = pd.DataFrame(df)
 
 def write_citydata(data_weather, data_walkscore, data_pollution, data_strava):
-    # still a bit hacky - not using global vars in the future
-    global df
 
     d = {'city':data_weather['name'], 'walkscore': data_walkscore['walkscore'], 'pm2_5': data_pollution['pm2_5'].mean(), 'co2': data_pollution['co'].mean(), 'no2': data_pollution['no2'].mean(), 'strava': data_strava}
     df = pd.DataFrame(d, index=[0])
